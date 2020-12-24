@@ -40,7 +40,7 @@ namespace TwitchLib.PubSub.Events
         /// <summary>
         /// ID of the user
         /// </summary>
-        public int UserID;
+        public string UserID;
 
         /// <summary>
         /// Username of the user

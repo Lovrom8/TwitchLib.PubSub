@@ -634,16 +634,16 @@ namespace TwitchLib.PubSub
                             switch (hype.Type)
                             {
                                 case HypeTrainType.Start:
-                                    OnHypeTrainStart?.Invoke(this, new OnHypeTrainStartArgs { });
+                                    OnHypeTrainStart?.Invoke(this, new OnHypeTrainStartArgs { ChannelId = hype.ChannelId, Config = hype.Config, Progress = hype.Progress });
                                     return;
                                 case HypeTrainType.LevelUp:
-                                    OnHypeTrainLevelUp?.Invoke(this, new OnHypeTrainLevelUpArgs { });
+                                    OnHypeTrainLevelUp?.Invoke(this, new OnHypeTrainLevelUpArgs { TimeToExpire = hype.TimeToExpire, Progress = hype.Progress });
                                     return;
                                 case HypeTrainType.Progression:
-                                    OnHypeTrainProgression?.Invoke(this, new OnHypeTrainProgressionArgs { });
+                                    OnHypeTrainProgression?.Invoke(this, new OnHypeTrainProgressionArgs { UserID = hype.UserID, Username = hype.Username, UserDisplayName = hype.UserDisplayName, SequenceId = hype.SequenceId, ActionType = hype.Action, SourceType = hype.SourceType, Quantity = hype.Quantity, Progress = hype.Progress });
                                     return;
                                 case HypeTrainType.End:
-                                    OnHypeTrainEnd?.Invoke(this, new OnHypeTrainEndArgs { });
+                                    OnHypeTrainEnd?.Invoke(this, new OnHypeTrainEndArgs { EndedAt = hype.EndedAt, EndingReason = hype.EndingReason });
                                     return;
                             }
                             return;

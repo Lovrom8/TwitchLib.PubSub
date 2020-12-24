@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
@@ -8,6 +10,7 @@ namespace TwitchLib.PubSub.Enums
     /// <summary>
     /// Enum HypeTrainDifficulty
     /// </summary>
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum HypeTrainDifficulty
     {
         /// <summary>Hype train easy difficulty</summary>

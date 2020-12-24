@@ -150,13 +150,13 @@ namespace TwitchLib.PubSub.Models.Responses.Messages
             {
                 case HypeTrainType.Start:
                     var configJson = JObject.Parse(jsonStr).SelectToken("data").SelectToken("config");
-                    var kickoffJson = JObject.Parse(jsonStr).SelectToken("data").SelectToken("kickoff");
+                    var kickoffJson = configJson.SelectToken("kickoff");
                     Id = "";
 
                     Config = new HypeTrainConfig
                     {
                         ChannelId = dataJson.SelectToken("channel_id").ToString(),
-                        IsWhitelisted = Convert.ToBoolean(configJson.SelectToken("channel_id")),
+                        IsWhitelisted = Convert.ToBoolean(configJson.SelectToken("is_whitelisted")),
 
                         Kickoff = new HypeTrainKickoff
                         {
@@ -168,7 +168,7 @@ namespace TwitchLib.PubSub.Models.Responses.Messages
                         CooldownDuration = Convert.ToInt64(configJson.SelectToken("cooldown_duration")),
                         LevelDuration = Convert.ToInt64(configJson.SelectToken("level_duration")),
 
-                        Difficulty = JsonConvert.DeserializeObject<HypeTrainDifficulty>(configJson.SelectToken("difficulty").ToString()),
+                        Difficulty = JsonConvert.DeserializeObject<HypeTrainDifficulty>($"\"{configJson.SelectToken("difficulty").ToString()}\""),
                         //RewardEndDate = "";
 
                         ParticipationConversionRates = new HypeTrainParticipationConversionRates
@@ -213,11 +213,15 @@ namespace TwitchLib.PubSub.Models.Responses.Messages
 
                         CalloutEmoteId = configJson.SelectToken("callout_emote_id").ToString(),
                         CalloutEmoteToken = configJson.SelectToken("callout_emote_token").ToString(),
-                        ThemeColor = configJson.SelectToken("theme_color").ToString(),
-                        HasConductorBadges = Convert.ToBoolean("has_conductor_badges")
+                        ThemeColor = configJson.SelectToken("primary_hex_color").ToString(),
+                        HasConductorBadges = Convert.ToBoolean(configJson.SelectToken("has_conductor_badges"))
                     };
 
-                    var difficultySettingsJson = configJson.SelectToken("difficulty_settings").SelectToken(configJson.SelectToken("difficulty").ToString());
+                    string difficultyStr = configJson.SelectToken("difficulty").ToString();
+                    var difficultySettingsJson = configJson.SelectToken("difficulty_settings")[difficultyStr];
+
+                    Config.DifficultySettings.Add(Config.Difficulty, new List<HypeTrainLevel>());
+
                     foreach (JToken levelSettingsJson in difficultySettingsJson.Children())
                     {
                         var rewardsList = new List<HypeTrainReward>();
@@ -323,9 +327,12 @@ namespace TwitchLib.PubSub.Models.Responses.Messages
                     UserID = dataJson.SelectToken("user_id").ToString();
                     Username = dataJson.SelectToken("user_login").ToString();
                     UserDisplayName = dataJson.SelectToken("user_display_name").ToString();
-                    UserProfileImageUrl = dataJson.SelectToken("user_profile_image_url").ToString();
-                    Action = JsonConvert.DeserializeObject<HypeTrainActionType>(dataJson.SelectToken("action").ToString());
+
+                    if (dataJson["user_profile_image_url"] != null)
+                        UserProfileImageUrl = dataJson.SelectToken("user_profile_image_url").ToString();
+                    Action = JsonConvert.DeserializeObject<HypeTrainActionType>($"\"{dataJson.SelectToken("action").ToString()}\"");
                     Quantity = Convert.ToInt32(dataJson.SelectToken("quantity").ToString());
+                    SourceType = JsonConvert.DeserializeObject<HypeTrainSourceType>($"\"{dataJson.SelectToken("source").ToString()}\"");
 
                     var progressionProgressJson = dataJson.SelectToken("progress");
                     var progressionLevelJson = progressionProgressJson.SelectToken("level");
@@ -424,7 +431,7 @@ namespace TwitchLib.PubSub.Models.Responses.Messages
 
                 case HypeTrainType.End:
                     EndedAt = Convert.ToInt64(dataJson.SelectToken("ended_at"));
-                    EndingReason = JsonConvert.DeserializeObject<HypeTrainEndingReason>(dataJson.SelectToken("ending_reason").ToString());
+                    EndingReason = JsonConvert.DeserializeObject<HypeTrainEndingReason>($"\"{dataJson.SelectToken("ending_reason").ToString()}\"");
                     break;
             }
         }

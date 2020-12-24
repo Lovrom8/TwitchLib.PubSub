@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace TwitchLib.PubSub.Enums
@@ -10,8 +11,10 @@ namespace TwitchLib.PubSub.Enums
     public enum HypeTrainSourceType
     {
         /// <summary>Bits were used to keep the train going</summary>
+        [EnumMember(Value = "BITS")] 
         Bits,
         /// <summary>Subscriptions were used to keep the train going</summary>
+        [EnumMember(Value = "SUBS")] 
         Subs
     }
 }

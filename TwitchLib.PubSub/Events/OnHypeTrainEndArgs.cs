@@ -14,7 +14,7 @@ namespace TwitchLib.PubSub.Events
         /// <summary>
         /// Server time issued by Twitch.
         /// </summary>
-        public string EndedAt;
+        public long EndedAt;
         /// <summary>
         /// Reason why the train ended.
         /// </summary>
