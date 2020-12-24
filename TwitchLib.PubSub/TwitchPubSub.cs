@@ -253,6 +253,11 @@ namespace TwitchLib.PubSub
         /// Fires when PubSub receives notice that a prediction has started or updated.
         /// </summary>
         public event EventHandler<OnPredictionArgs> OnPrediction;
+        /// <inheritdoc/>
+        /// <summary>
+        /// Fires when PubSub receives notice a hype train has started or progressed.
+        /// </summary>
+        public event EventHandler<OnHypeTrainArgs> OnHypeTrain;
         #endregion
 
         /// <summary>
@@ -604,6 +609,20 @@ namespace TwitchLib.PubSub
                                     return;
                             }
                             return;
+                        case "hype-train-events-v1":
+                            var hype = msg.MessageData as HypeTrainEvents;
+                            switch (hype.Type)
+                            {
+                                case HypeTrainType.Start:
+                                    return;
+                                case HypeTrainType.LevelUp:
+                                    return;
+                                case HypeTrainType.Progression:
+                                    return;
+                                case HypeTrainType.End:
+                                    return;
+                            }
+                            return;
                     }
                     break;
                 case "pong":
@@ -852,6 +871,18 @@ namespace TwitchLib.PubSub
         public void ListenToPredictions(string channelTwitchId)
         {
             var topic = $"predictions-channel-v1.{channelTwitchId}";
+            _topicToChannelId[topic] = channelTwitchId;
+            ListenToTopic(topic);
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Sends request to listen to hype train events.
+        /// </summary>
+        /// <param name="channelTwitchId"></param>
+        public void ListenToHypeTrains(string channelTwitchId)
+        {
+            var topic = $"hype-train-events-v1.{channelTwitchId}";
             _topicToChannelId[topic] = channelTwitchId;
             ListenToTopic(topic);
         }

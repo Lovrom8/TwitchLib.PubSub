@@ -228,6 +228,11 @@ namespace TwitchLib.PubSub.Interfaces
         /// <param name="channelTwitchId">The channel twitch identifier.</param>
         void ListenToPredictions(string channelTwitchId);
         /// <summary>
+        /// Listens to hype train events
+        /// </summary>
+        /// <param name="channelTwitchId">The channel twitch identifier.</param>
+        void ListenToHypeTrains(string channelTwitchId);
+        /// <summary>
         /// Sends the topics.
         /// </summary>
         /// <param name="oauth">The oauth.</param>
