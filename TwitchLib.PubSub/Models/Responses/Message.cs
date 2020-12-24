@@ -62,6 +62,9 @@ namespace TwitchLib.PubSub.Models.Responses
                 case "predictions-channel-v1":
                     MessageData = new PredictionEvents(encodedJsonMessage);
                     break;
+                case "hype-train-events-v1":
+                    MessageData = new HypeTrainEvents(encodedJsonMessage);
+                    break;
             }
         }
     }

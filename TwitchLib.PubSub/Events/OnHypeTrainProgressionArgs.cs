@@ -10,7 +10,7 @@ namespace TwitchLib.PubSub.Events
     /// <summary>
     /// Class representing arguments of hype train progression event.
     /// </summary>
-    class OnHypeTrainProgressionArgs
+    public class OnHypeTrainProgressionArgs
     {
         /// <summary>
         /// Unknown value.

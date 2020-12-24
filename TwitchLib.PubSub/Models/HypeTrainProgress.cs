@@ -7,7 +7,45 @@ namespace TwitchLib.PubSub.Models
     // https://github.com/Emilgardis/twitch_api2/blob/655025c6a461104d98122918f54cf3b71bbfd9dc/src/pubsub/hype_train.rs#L479
     public class HypeTrainReward
     {
-        // TODO finish - badges and emotes
+        /// <summary>
+        /// Reward type - EMOTE/BADGE
+        /// </summary>
+        public string Type;
+
+        /// <summary>
+        /// Reward ID
+        /// </summary>
+        public string Id;
+
+        /// <summary>
+        /// Token for this emote
+        /// </summary>
+        public string Token;
+
+        /// <summary>
+        /// Group ID of the reward
+        /// </summary>
+        public string GroupId;
+
+        /// <summary>
+        /// Level this reward is from
+        /// </summary>
+        public int RewardLevel;
+
+        /// <summary>
+        /// Group ID of the reward
+        /// </summary>
+        public string SetId;
+
+        /// <summary>
+        /// ID of the badge - specific for BADGE reward
+        /// </summary>
+        public string BadgeID;
+
+        /// <summary>
+        /// Image URL of the badge - specific for BADGE reward
+        /// </summary>
+        public string ImageURL;
     }
 
     public class HypeTrainLevel

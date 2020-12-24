@@ -9,7 +9,7 @@ namespace TwitchLib.PubSub.Events
     /// <summary>
     /// HypeTrainEnd arguments class.
     /// </summary>
-    class OnHypeTrainEnd : EventArgs
+    public class OnHypeTrainEndArgs : EventArgs
     {
         /// <summary>
         /// Server time issued by Twitch.

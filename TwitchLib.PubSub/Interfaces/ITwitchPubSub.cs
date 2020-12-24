@@ -156,6 +156,22 @@ namespace TwitchLib.PubSub.Interfaces
         /// Occurs when [on prediction].
         /// </summary>
         event EventHandler<OnPredictionArgs> OnPrediction;
+        /// <summary>
+        /// Occurs when [on hype train start].
+        /// </summary>
+        event EventHandler<OnHypeTrainStartArgs> OnHypeTrainStart;
+        /// <summary>
+        /// Occurs when [on hype train level up].
+        /// </summary>
+        event EventHandler<OnHypeTrainLevelUpArgs> OnHypeTrainLevelUp;
+        /// <summary>
+        /// Occurs when [on hype train progress].
+        /// </summary>
+        event EventHandler<OnHypeTrainProgressionArgs> OnHypeTrainProgress;
+        /// <summary>
+        /// Occurs when [on hype train end].
+        /// </summary>
+        event EventHandler<OnHypeTrainEndArgs> OnHypeTrainEnd;
 
         /// <summary>
         /// Connects this instance.

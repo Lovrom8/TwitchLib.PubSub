@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using TwitchLib.PubSub.Models;
 
 namespace TwitchLib.PubSub.Events
@@ -24,7 +22,7 @@ namespace TwitchLib.PubSub.Events
         /// <summary>
         /// Hype train configuration
         /// </summary>
-        public HypeTrainConfig Cofig;
+        public HypeTrainConfig Config;
 
         /// <summary>
         /// Server time epoch in milliseconds when hype train was updated
@@ -50,7 +48,6 @@ namespace TwitchLib.PubSub.Events
         /// Ending reason - maybe use the enum
         /// </summary>
         public string EndingReason;
-
 
         /// <summary>
         /// Progress of hype train

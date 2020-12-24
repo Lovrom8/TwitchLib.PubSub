@@ -255,9 +255,29 @@ namespace TwitchLib.PubSub
         public event EventHandler<OnPredictionArgs> OnPrediction;
         /// <inheritdoc/>
         /// <summary>
-        /// Fires when PubSub receives notice a hype train has started or progressed.
+        /// Fires when PubSub receives notice a hype train has started.
         /// </summary>
-        public event EventHandler<OnHypeTrainArgs> OnHypeTrain;
+        public event EventHandler<OnHypeTrainStartArgs> OnHypeTrainStart;
+        /// <inheritdoc/>
+        /// <summary>
+        /// Fires when PubSub receives notice a hype train has leveled up.
+        /// </summary>
+        public event EventHandler<OnHypeTrainLevelUpArgs> OnHypeTrainLevelUp;
+        /// <inheritdoc/>
+        /// <summary>
+        /// Fires when PubSub receives notice a hype train has started.
+        /// </summary>
+        public event EventHandler<OnHypeTrainProgressionArgs> OnHypeTrainProgression;
+        /// <inheritdoc/>
+        /// <summary>
+        /// Fires when PubSub receives notice a hype train has started.
+        /// </summary>
+        public event EventHandler<OnHypeTrainEndArgs> OnHypeTrainEnd;
+        /// <inheritdoc/>
+        /// <summary>
+        /// Fires when PubSub receives notice a hype train has progressed.
+        /// </summary>
+        public event EventHandler<OnHypeTrainProgressionArgs> OnHypeTrainProgress;
         #endregion
 
         /// <summary>
@@ -614,12 +634,16 @@ namespace TwitchLib.PubSub
                             switch (hype.Type)
                             {
                                 case HypeTrainType.Start:
+                                    OnHypeTrainStart?.Invoke(this, new OnHypeTrainStartArgs { });
                                     return;
                                 case HypeTrainType.LevelUp:
+                                    OnHypeTrainLevelUp?.Invoke(this, new OnHypeTrainLevelUpArgs { });
                                     return;
                                 case HypeTrainType.Progression:
+                                    OnHypeTrainProgression?.Invoke(this, new OnHypeTrainProgressionArgs { });
                                     return;
                                 case HypeTrainType.End:
+                                    OnHypeTrainEnd?.Invoke(this, new OnHypeTrainEndArgs { });
                                     return;
                             }
                             return;

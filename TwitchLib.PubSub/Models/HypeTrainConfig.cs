@@ -60,7 +60,7 @@ namespace TwitchLib.PubSub.Models
         public long NumOfEvents;
     }
 
-    public class HypeTrainParticipationConversionRates
+    public class HypeTrainParticipations
     {
         public long BitsCheer;
         public long BitsExtensions;
@@ -74,18 +74,14 @@ namespace TwitchLib.PubSub.Models
         public long SubsTier3Sub;
     }
 
-    public class HypeTrainNotificationThresholds
+    public class HypeTrainParticipationConversionRates : HypeTrainParticipations
     {
-        public long BitsCheer;
-        public long BitsExtensions;
-        public long BitsPoll;
 
-        public long SubsTier1GiftedSub;
-        public long SubsTier1Sub;
-        public long SubsTier2GiftedSub;
-        public long SubsTier2Sub;
-        public long SubsTier3GiftedSub;
-        public long SubsTier3Sub;
+    }
+
+    public class HypeTrainNotificationThresholds : HypeTrainParticipations
+    {
+
     }
 
     /// Configuration of hype train
@@ -129,6 +125,11 @@ namespace TwitchLib.PubSub.Models
         /// <summary>
         /// Unknown
         /// </summary>
+        public bool IsEnabled;
+
+        /// <summary>
+        /// Unknown
+        /// </summary>
         public bool IsWhitelisted;
 
         /// <summary>
@@ -141,8 +142,15 @@ namespace TwitchLib.PubSub.Models
         /// </summary>
         public HypeTrainNotificationThresholds NotificationThresholds;
 
+        /// <summary>
         /// Conversion rates for participations
+        /// </summary>
         public HypeTrainParticipationConversionRates ParticipationConversionRates;
+
+        /// <summary>
+        /// Participations in the hype train
+        /// </summary>
+        public HypeTrainParticipations Participations;
 
         /// <summary>
         /// Duration in nanoseconds of each level
